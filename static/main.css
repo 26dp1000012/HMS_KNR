@@ -1,0 +1,20 @@
+.container{
+    border: 2px solid black;
+    height: 815px;
+}
+
+.center{
+    text-align: center;
+    margin:auto;
+    color: rgb(5,5,150);
+}
+
+.input-form{
+    border: 1px solid blue;
+    width: 600px;
+    height: 350px;
+    margin: auto;
+    border-radius: 10px;
+    font-size: 16px;
+    text-align: justify;
+}
