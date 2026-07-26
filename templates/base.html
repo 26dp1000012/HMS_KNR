@@ -3,19 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/main.css">
     <title>Register</title>
+    <link rel="stylesheet" href="/static/main.css">
 </head>
 <body>
+    <nav class="container">
+        <div class="center"><h1>Welcome to ABC Hospital</h1></div>
+    </nav>
 
-<div class="container">
-    <div class="center"><h2>Welcome To ABC Hospital</h2></div>
-    {% block content %}
+    <main>
 
-    {% endblock %}
+        {% block content %}
+        <!------sub html will be inserted here-->
+        {% endblock %}
+    </main>
 
-</div>
+    <footer class="center">
+        Copyright reserved to ABC Hospitals,©2026
+    </footer>
 </body>
 </html>
 
 
+
+        
