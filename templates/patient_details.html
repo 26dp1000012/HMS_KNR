@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patient details</title>
-
-    <link rel="stylesheet" href="/static/main.css">
-</head>
-<body>
-    <div class="container">
-        <div class="center"><h1>Welcome to ABC Hospital</h1></div>
-        <div style="text-align: right;"><button onclick="window.location.href='admin_dashboard.html'">Back</button></div>
+{% extends "base.html" %}
+{% block content %} 
+        <div style="text-align: right;"><button onclick="window.location.href='{{url_for('admin_dashboard')}}'">Back</button></div>
         <div class="dashboard-form">
             <div>
                 <h3 class="center">Admin Dashboard</h3>
@@ -24,19 +14,11 @@
                 </div>
                 <br>
                 <div>
-                    <table name= "p_history" border="1">
-                        <tr><th>Visit No</th>
-                            <th>Visit Type</th>
-                            <th>Tests Done</th>
-                            <th>Diagnosis</th>
-                            <th>Prescription</th>
-                            <th>Medicines</th>
-                        </tr>
+                    <table class="center" name= "p_history" border="1">
+                        <tr><th>Visit No</th><th>Visit_date</th><th>Visit Type</th><th>Tests Done</th><th>Diagnosis</th><th>Prescription</th><th>Medicines</th></tr>
                     </table>
                 </div>
             </div>
         </div>
-        <div class="center">Copyright reserved to ABC Hospitals,©2026</div>
-    </div>
-</body>
-</html>
+{% endblock %} 
+
