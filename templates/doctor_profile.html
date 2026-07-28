@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %} 
+    <div class="dashboard-form">
+        <div class="input-form">
+            <form>
+                {% for d in app_data %}
+                    {{d_name}}
+                    {{spz}}
+                    {{experience}}
+                {% endfor %}
+                <textarea></textarea>
+            </form>
+            <div><button>check_avialability</button><button>Go Back</button></div>
+        </div>
+    </div>
+{% endblock %}

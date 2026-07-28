@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %} 
+        <div style="text-align: right;"><input type="text" name="searchtext"> | <input type="button" value="Search"></div>
+        <div class="dashboard-form">
+            <div class="input-form">
+                <form>
+                <table class="center" name="Upcoming Appointments" border="1">
+                    <caption>Upcoming Appointments</caption>
+                    <tr><th>SrNo</th><th>Patient Name</th><th>Patient History</th><th>Actions</th></tr>
+                    {% for d in app_data %}
+                        <tr><td>{{d.SrNo}}</td><td>{{d.p_name}}</td><td><a href="{{ url_for('patient_details')}}">Patient History</a></td><td><input type="button" value="Mark as Complete"><input type="button" value="Cancel"></td></tr>
+                    {% endfor %}
+                </table>
+                <table class="center" name="Assigned Patients" border="1">
+                    <caption>Assigned Patients</caption>
+                    <tr><td>Patient name</td><td><input type="button" value="edit"></td><td><input type="button" value="View"></td></tr>
+                </table>
+                
+                </form>
+            </div>
+        </div>
+{% endblock %}

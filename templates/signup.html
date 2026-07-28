@@ -1,24 +1,27 @@
 {% extends "base.html" %}
 {% block content %} 
     <div class="input-form">
-        <form>
+        <form action="/register" method="POST">
             <h3 class="center">Register New User</h3>
             <table class="center">
             <tr><td><label>Email: </label></td><td><input type="email" name="emailid"></td></tr>
+            <tr><td><label>Password: </label></td><td><input type="password" name="pwd"></td></tr>
             <tr><td><label>Full name: </label></td><td><input type="text" name="fname"></td></tr>
             <tr><td><label>User type: </label></td>
                 <td>
                     <select name="utype">
                         <option value="None" disabled selected>--select--</option>
-                        <option value="Doctor">doctor</option>
-                        <option value="Patients">patient</option>
+                        <option value="1">doctor</option>
+                        <option value="2">patient</option>
                     </select>
                 </td>
             <tr><td><label>Specialization</label></td><td><input type="text" name="splz"></td></tr>
+            <tr><td><label>Experience(yrs)</label></td><td><input type="number" name="exp"></td></tr>
             <tr><td><label>Address: </label></td><td><textarea rows="5" cols="20" name="address" id=""></textarea></td></tr>
-            <tr><td><label>Password: </label></td><td><input type="password" name="pwd"></td></tr>
+            <tr><td><label>Phone number</label></td><td><input type="text" name="phone_num"></td></tr>
             <tr><td><input type="submit" value="Register"></td><td><a href="{{ url_for('signin') }}">Alredy have an account?</a></td></tr> 
             </table>
+            <h6 class="center">{{ err_msg }}</h6>
         </form>
     </div>
-{% endblock %}
+{% endblock %}  

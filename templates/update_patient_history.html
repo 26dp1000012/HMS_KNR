@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %} 
+        <div style="text-align: right;"><button onclick="window.location.href='{{url_for('doctor_dashboard')}}'">Back</button></div>
+        <div class="dashboard-form">
+            <div>
+                <h3 style="text-align: left;">Update Patient History</h3>
+                <div>
+                    <table style="text-align: left;">
+                        <tr><td>Patient name: </td><td>xxxx</td></tr>
+                        <tr><td>Department: </td><td>zzzz</td></tr>
+                    </table>
+                </div>
+                <form>
+                    <table>
+                        <tr><td><label>Visit Type</label><input type="text"></td></tr>
+                        <tr><td><label>Test Done</label><input type="text"></td></tr>
+                        <tr><td><label>Diagnosis</label><input type="text"></td></tr>
+                        <tr><td><label>Prescription</label><input type="text"></td></tr>
+                        <tr><td><label>Medicines</label><input type="text"></td></tr>
+                    </table>
+                </form>
+                <div style="text-align: right;"><button>Save</button></div>
+            </div>
+        </div>
+{% endblock %} 
