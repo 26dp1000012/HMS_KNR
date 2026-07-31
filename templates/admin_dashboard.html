@@ -7,20 +7,21 @@
                 <h3 class="center">Admin Dashboard</h3>
                 <table class="center" id="Doctors" border="1">
                     <caption>Registered Doctors</caption>
-                    <tr><td>Doctor name</td><td>approved</td><td><input type="button" value="edit"></td><td><input type="button" value="delete"></td><td><input type="button" value="blacklist"></td></tr>
-                    <tr><td>Doctor name</td><td>approved</td><td><input type="button" value="edit"></td><td><input type="button" value="delete"></td><td><input type="button" value="blacklist"></td></tr>
+                    <tr><th>Name</th><th>Specialization}</th><th colspan="3">Actions</th></tr>
+                    {% for d in dr_data %}
+                        <tr><td>{{d.fullname}}</td><td>{{d.spl}}</td><td><a href="/ed_dr?dr_id={{d.dr_id}}" class="btn-link">edit</a></td><td><a href="#" class="btn-link btn-danger">Approve</a></td><td><a href="#" class="btn-link btn-blacklist">blacklist</a></td></tr>
+                    {% endfor %}
                 </table>
                 <table class="center" id="Patients" border="1">
                     <caption>Registered Patients</caption>
-                    <tr><td>Patient name</td><td><input type="button" value="edit"></td><td><input type="button" value="delete"></td><td><input type="button" value="blacklist"></td></tr>
-                    <tr><td>Patient name</td><td><input type="button" value="edit"></td><td><input type="button" value="delete"></td><td><input type="button" value="blacklist"></td></tr>
-                </table>
+                    <tr><th>Name</th><th>Phone number}</th><th colspan="2">Actions</th></tr>
+                    {% for p in pt_data %}
+                        <tr><td>{{p.fullname}}</td><td>{{p.phone_num}}</td><td><a href="#" class="btn-link">edit</a></td><td><a href="#" class="btn-link btn-blacklist">blacklist</a></td></tr>
+                    {% endfor %}
                 <table class="center" id="Upcoming Appointments" border="1">
                     <caption>Upcoming Appointments</caption>
                     <tr><th>SrNo</th><th>Patient Name</th><th>Doctor Name</th><th>Department</th><th>Patient History</th><th>Action</th></tr>
-                    {% for d in app_data %}
-                        <tr><td>{{d.SrNo}}</td><td>{{d.p_name}}</td><td>{{d.d_name}}</td><td>{{d.spz}}</td><td><a href="{{ url_for('patient_details')}}">Patient History</a></td><td><input type="button" value="View"></td></tr>
-                    {% endfor %}
+                    
                 </table>
                 </form>
             </div>

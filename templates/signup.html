@@ -9,19 +9,33 @@
             <tr><td><label>Full name: </label></td><td><input type="text" name="fname"></td></tr>
             <tr><td><label>User type: </label></td>
                 <td>
-                    <select name="utype">
-                        <option value="None" disabled selected>--select--</option>
-                        <option value="1">doctor</option>
+                    <select name="utype" id="utype" onchange="hide_show_other_details()">
                         <option value="2">patient</option>
+                        <option value="1">doctor</option>
+                        
                     </select>
-                </td>
-            <tr><td><label>Specialization</label></td><td><input type="text" name="splz"></td></tr>
-            <tr><td><label>Experience(yrs)</label></td><td><input type="number" name="exp"></td></tr>
+                </td></tr>
+            <tr id="dr_details1"><td><label>Specialization</label></td><td><input type="text" name="splz"></td></tr>
+            <tr id="dr_details2"><td><label>Experience(yrs)</label></td><td><input type="number" name="exp"></td></tr>
             <tr><td><label>Address: </label></td><td><textarea rows="5" cols="20" name="address" id=""></textarea></td></tr>
             <tr><td><label>Phone number</label></td><td><input type="text" name="phone_num"></td></tr>
             <tr><td><input type="submit" value="Register"></td><td><a href="{{ url_for('signin') }}">Alredy have an account?</a></td></tr> 
             </table>
             <h6 class="center">{{ err_msg }}</h6>
         </form>
+        <script>
+            function hide_show_other_details(){
+                const utype = document.getElementById("utype");
+                const dr_details1 = document.getElementById("dr_details1");
+                const dr_details2 = document.getElementById("dr_details2");
+                if (utype.value=="1"){
+                    dr_details1.style.display = "table-row";
+                    dr_details2.style.display = "table-row";
+                } else {
+                    dr_details1.style.display = "none";
+                    dr_details2.style.display = "none";
+                }
+            }
+        </script>
     </div>
 {% endblock %}  

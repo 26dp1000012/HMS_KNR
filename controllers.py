@@ -17,6 +17,10 @@ def signin():
         user=db.session.query(User_Credentials).filter(User_Credentials.email==uname, User_Credentials.password==pwd).first()
         if user and user.role == 0:
             return redirect(url_for("admin_dashboard"))
+        elif user and user.role == 1:
+            return redirect(url_for("doctor_dashboard"))
+        elif user and user.role == 2:
+            return redirect(url_for("patient_dashboard"))
         else:
             return redirect(url_for("signup"))
     return render_template("login.html")
@@ -36,21 +40,30 @@ def signup():
             uc=User_Credentials(email=uname, password=pwd, role=int(role))
             db.session.add(uc)
             db.session.commit() #save in db
+            #After credntials then separate pt and Dr
+            fname=request.form.get("fname")
+            address=request.form.get("address")
+            phone_num=request.form.get("phone_num")
+            if int(role)==2:
+                pt_profile = Pt_Profile(pt_id=uc.id,fullname=fname,address=address, phone_num=phone_num)
+                db.session.add(pt_profile)#if patient role
+            else:
+                splz=request.form.get("splz")
+                exp=request.form.get("exp")
+                dr_profile=Dr_Profile(dr_id=uc.id,fullname=fname,address=address, phone_num=phone_num, spl=splz,experiance=exp)
+                db.session.add(dr_profile)#if doctor role
+            db.session.commit()
+    else:
+        #request type is get
+        return render_template("signup.html")#Save everything
 
-    #request type is get
-    return render_template("signup.html")
-
-#data dict
-app_dct=[
-    {"SrNo":"1","p_name":"xyz", "d_name":"abc", "spz":"Neurology"},
-    {"SrNo":"2","p_name":"pqr", "d_name":"cdf", "spz":"Cardiology"},
-]
 
 @app.route("/admin")
 def admin_dashboard():
-    return render_template("admin_dashboard.html", app_data =app_dct)
-
-
+    dr_data = get_all_drs()
+    pt_data = get_all_pts()
+    return render_template("admin_dashboard.html", dr_data=dr_data, pt_data=pt_data)
+                           
 @app.route("/patient_details")
 def patient_details():
     return render_template("patient_details.html")
@@ -60,6 +73,43 @@ def patient_dashboard():
     return render_template("patient_dashboard.html")
 
 @app.route("/doctor")
-def doctor_dasboard():
+def doctor_dashboard():
     return render_template("doctor_dashboard.html")
 
+@app.route("/ed_dr")
+def edit_doctor():
+    #render with specific doctor data
+    dr_id=request.args.get("dr_id")
+    dr_searched=search_dr(dr_id)
+    return render_template("edit_doctor.html", dr_data=dr_searched)
+
+@app.route("/update_dr", methods=['GET','POST'])
+def update_dr():
+    uid=request.form.get("uid")
+    name=request.form.get("d_name")
+    splz=request.form.get("splz")
+    exp=request.form.get("exp")
+    address=request.form.get("address")
+    old_dr_details = db.session.query(Dr_Profile).filter(Dr_Profile.dr_id==uid).first()
+    print(old_dr_details)
+    #update
+    old_dr_details.fullname=name
+    old_dr_details.spl=splz
+    old_dr_details.exp=exp
+    old_dr_details.address=address
+    db.session.commit()
+    return redirect(url_for("admin_dashboard"))
+
+#Additional python function:
+def get_all_drs():
+    dr_data=db.session.query(Dr_Profile).filter().all()
+    return dr_data
+
+def get_all_pts():
+    pt_data=db.session.query(Pt_Profile).filter().all()
+    return pt_data
+
+def search_dr(id):
+    dr_searched=db.session.query(Dr_Profile).filter(Dr_Profile.dr_id==id).first()
+    return dr_searched
+ 
